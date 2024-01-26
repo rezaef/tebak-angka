@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permainan Tebak Angka</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Permainan Tebak Angka</h1>
+        <p>Masukkan angka antara 1 dan 100:</p>
+        <input type="text" id="guessInput">
+        <button id="guessButton">Tebak!</button>
+        <p id="message"></p>
+    </div>
+
+    <footer>
+        <p>Dibuat oleh: <span id="namasaya">Reza.ef</span></p>
+    </footer>
+
+    <script>
+        // CSS Inline untuk Style Khusus
+        document.body.style.fontFamily = "Arial, sans-serif";
+        document.body.style.backgroundColor = "#f4f4f4";
+        document.body.style.margin = "0";
+        document.body.style.padding = "0";
+        document.body.style.display = "flex";
+        document.body.style.justifyContent = "center";
+        document.body.style.alignItems = "center";
+        document.body.style.height = "100vh";
+
+        document.querySelector('.container').style.textAlign = "center";
+        document.querySelector('.container').style.backgroundColor = "#fff";
+        document.querySelector('.container').style.padding = "20px";
+        document.querySelector('.container').style.borderRadius = "8px";
+        document.querySelector('.container').style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+
+        document.querySelector('h1').style.marginTop = "0";
+
+        document.querySelector('input[type="text"]').style.padding = "8px";
+        document.querySelector('input[type="text"]').style.marginBottom = "10px";
+        document.querySelector('input[type="text"]').style.width = "200px";
+        document.querySelector('input[type="text"]').style.border = "1px solid #ccc";
+        document.querySelector('input[type="text"]').style.borderRadius = "4px";
+
+        document.querySelector('button').style.padding = "8px 20px";
+        document.querySelector('button').style.backgroundColor = "#007bff";
+        document.querySelector('button').style.color = "#fff";
+        document.querySelector('button').style.border = "none";
+        document.querySelector('button').style.borderRadius = "4px";
+        document.querySelector('button').style.cursor = "pointer";
+        document.querySelector('button').style.transition = "background-color 0.3s";
+
+        // Mendefinisikan nomor acak di luar fungsi agar tetap konsisten selama satu sesi permainan
+        const nomorAcak = Math.floor(Math.random() * 100) + 1;
+
+        function tebakAngka() {
+            const tebakan = parseInt(document.getElementById('guessInput').value);
+            const pesanElement = document.getElementById('message');
+
+            if (isNaN(tebakan) || tebakan < 1 || tebakan > 100) {
+                pesanElement.textContent = 'Masukkan angka antara 1 dan 100.';
+                return;
+            }
+
+            if (tebakan === nomorAcak) {
+                pesanElement.textContent = `Selamat! Anda menebak dengan benar!`;
+            } else if (tebakan < nomorAcak) {
+                pesanElement.textContent = 'Tebakan Anda terlalu rendah, coba lagi.';
+            } else {
+                pesanElement.textContent = 'Tebakan Anda terlalu tinggi, coba lagi.';
+            }
+        }
+
+        document.getElementById('guessButton').addEventListener('click', tebakAngka);
+        document.getElementById('guessInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                tebakAngka();
+            }
+        });
+    </script>
+</body>
+</html>
